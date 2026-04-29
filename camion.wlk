@@ -3,6 +3,10 @@ import cosas.*
 object camion {
 	const property cosas = #{}
 
+method puedeCircularEnRutaConNivelMaximo(nivelMaximo){
+	return (self.estaExcedidoDePeso().not() && self.hayCosasQueTenganUnPeligroMayorA(nivelMaximo).not())
+}
+
   method cosasMasPeligrosaQue(unaCosa){
 	return self.cosas().filter{cosa => cosa.nivelPeligrosidad()> unaCosa.nivelDePeligrosidad()}
 }

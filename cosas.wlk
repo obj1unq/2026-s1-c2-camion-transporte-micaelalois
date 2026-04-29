@@ -79,9 +79,15 @@ object bateriaAntiaerea{
 		return contieneMisiles
 	}
 
-	method cambiarContenidoDeMisiles(){
-		 contieneMisiles = self.contieneMisiles().not() 
+	method ponerMisiles(){
+		contieneMisiles = true
 	}
+
+	method sacarMisiles(){
+		contieneMisiles = false 
+	}
+
+	
 	method peso(){
 		return (if (contieneMisiles) 300 else 200)
        
