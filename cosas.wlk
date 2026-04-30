@@ -5,6 +5,11 @@ object knightRider {
 	method nivelPeligrosidad() { 
 		return 10 
 		}
+
+	method bultosNecesariosParaSerTransportado(){
+		return 1
+		
+	}
 }
 
 object arenaAGranel{
@@ -18,12 +23,19 @@ object arenaAGranel{
 	 method nivelPeligrosidad(){
 		return 1
 	 }
+	 method bultosNecesariosParaSerTransportado(){
+		return 1
+		
+	}
 
 
 }
 object bumblebee{
 	var modo =  auto
-
+    method bultosNecesariosParaSerTransportado(){
+		return 2
+		
+	}
 	method modo(){
 		return modo
 	}
@@ -56,6 +68,18 @@ object robot{
 object paqueteDeLadrillos{
 	var cantidadDeLadrillosDelPaquete = 0
 
+
+	method bultosNecesariosParaSerTransportado(){
+		 if self.cantidadDeLadrillosDelPaquete() <= 100 { return 1
+		 } 
+		 else if self.cantidadDeLadrillosDelPaquete() > 100 && self.cantidadDeLadrillosDelPaquete()<= 300{
+		     return 2
+			 }
+			 else if self.cantidadDeLadrillosDelPaquete()> 300 { return 3
+			 }	
+	}
+
+
 	method cantidadDeLadrillosDelPaquete(){
 		return cantidadDeLadrillosDelPaquete
 	}
@@ -75,6 +99,11 @@ object paqueteDeLadrillos{
 
 object bateriaAntiaerea{
 	var contieneMisiles = true
+	 method bultosNecesariosParaSerTransportado(){
+		if self.contieneMisiles(){ return 2
+		}
+		else return 1
+	}
 	method contieneMisiles(){
 		return contieneMisiles
 	}
@@ -109,11 +138,19 @@ method cambiarPeso(_peso){
 method nivelPeligrosidad(){
 	return 200
 }
+method bultosNecesariosParaSerTransportado(){
+		return 1
+		
+	}
 
 }
 
 object contenedorPortuario{
 	var cosas = #{}
+
+method bultosNecesariosParaSerTransportado(){
+	return 1 + cosas().map({cosa=> cosa.bultosNecesariosParaSerTransportado()})
+}
 
 method cosas(){
 	return cosas
@@ -143,6 +180,10 @@ method nivelPeligrosidad(){
 object embalajeDeSeguridad{
  var tieneDentroLaCosa= knightRider
 
+ method bultosNecesariosParaSerTransportado(){
+		return 2
+		
+	}
 
 method cambiarLoQueTieneDentroPor(_cosa){
 	tieneDentroLaCosa = _cosa 

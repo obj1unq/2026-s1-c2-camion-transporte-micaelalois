@@ -233,3 +233,26 @@ Nota: ojo al armar el test, porque para Wollok [800,600] es distinto a [600,800]
 */
 
 
+/*Ejemplos
+Caso 1
+Suponiendo que el camión tiene:
+
+El contenedor portuario con Knight Rider y Bumblebee.
+El embalaje de seguridad envolviendo los residuos radiactivos.
+Arena a granel.
+Un paquete de 50 ladrillos.
+La batería antiaérea descargada.
+Entonces la cantidad de bultos es: 9.
+Caso 2
+Si el camión tiene:
+
+Un paquete de 150 ladrillos.
+La batería antiaérea cargada.
+Un contenedor portuario vacío.
+Entonces la cantidad de bultos es 5.
+Caso 3
+Si el camión tiene:
+
+Un paquete de 350 ladrillos.
+Arena a granel.
+Entonces la cantidad de bultos es 4.*/
