@@ -211,5 +211,25 @@ y Bumblebee está en modo robot."{
 }
 }
 
+/*El contenedor portuario vacío pesa 100 y su peligrosidad es 0.
+El contenedor portuario que tiene a Knight Rider y 50 kg de arena a granel pesa 650 y su peligrosidad es 10.
+Si el embalaje de seguridad envuelve a Knight Rider, su peso es 500 y su peligrosidad es 5.
+Si el embalaje de seguridad envuelve a Bumblebee en modo auto, su peso es 800 y su peligrosidad 7,5.*/
+
+/*Para un camión cargado con Bumblebee y un paquete de 300 ladrillos:
+
+Tiene algo que pesa entre 5 y 700.
+Tiene algo que pesa entre 5 y 1000.
+No tiene algo que pese entre 900 y 1000.*/
 
   
+/*Para un camión cargado con Bumblebee y un paquete de 300 ladrillos, la cosa más pesada es Bumblebee.
+Para un camión vacío, no se puede calcular la cosa más pesada.*/
+
+
+/*Ejemplo
+Para un camión cargado con Bumblebee y un paquete de 300 ladrillos, los pesos son 800 y 600.
+Nota: ojo al armar el test, porque para Wollok [800,600] es distinto a [600,800]. A nivel de negocio da igual.
+*/
+
+

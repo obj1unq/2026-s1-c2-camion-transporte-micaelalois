@@ -112,4 +112,53 @@ method nivelPeligrosidad(){
 
 }
 
+object contenedorPortuario{
+	var cosas = #{}
 
+method cosas(){
+	return cosas
+}
+	method cargar(unaCosa) {
+		if(!cosas.contains(unaCosa)){
+		cosas.add(unaCosa) 
+	    }
+	}
+
+	method descargar(unaCosa){
+		if (cosas.contains(unaCosa)){
+		cosas.remove(unaCosa)
+		}
+	}
+
+method peso(){
+	return 100 +  self.cosas().sum{cosa => cosa.peso()}
+}
+
+
+method nivelPeligrosidad(){
+	return (if (cosas == {}) 0 else self.cosas().max({cosa => cosa.nivelPeligrosidad()}))
+}
+}
+
+object embalajeDeSeguridad{
+ var tieneDentroLaCosa= knightRider
+
+
+method cambiarLoQueTieneDentroPor(_cosa){
+	tieneDentroLaCosa = _cosa 
+}
+
+method tieneDentroLaCosa(){
+	return tieneDentroLaCosa
+}
+
+method peso(){
+	return self.tieneDentroLaCosa().peso()
+}
+
+method nivelPeligrosidad(){
+	return self.tieneDentroLaCosa().nivelPeligrosidad()/2
+}
+
+
+}

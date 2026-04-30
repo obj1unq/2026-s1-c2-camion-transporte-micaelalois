@@ -3,6 +3,19 @@ import cosas.*
 object camion {
 	const property cosas = #{}
 
+
+method pesoDeTodasLasCosas(){
+	return self.cosas().map({cosa => cosa.peso()}) //MAP HACE RECORRIDO DE TRANSFORMACIÓN
+}
+]
+method cosaConMayorPeso(){
+	return if (cosas().isEmpty()){self.error("La colección está vacía")} // EL MAX NO SE USA SI ESTÁ VACIA LA COLECCION
+	else  { self.cosas().max({cosa => cosa.peso()})}
+}
+
+method tieneAlgoQuePesaEntre(unNumero, otroNumero){
+	return self.cosas().filter{cosa => cosa.peso().between(unNumero, otroNumero)}
+}
 method puedeCircularEnRutaConNivelMaximo(nivelMaximo){
 	return (self.estaExcedidoDePeso().not() && self.hayCosasQueTenganUnPeligroMayorA(nivelMaximo).not())
 }
