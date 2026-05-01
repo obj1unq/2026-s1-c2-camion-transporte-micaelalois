@@ -1,6 +1,259 @@
 object knightRider {
-	method peso() { return 500 }
-	method nivelPeligrosidad() { return 10 }
+
+	method aplicarEfectoDeAccidente(){ //SE DEFINE PARA QUE CAMION ENTIENDA POLIMORFISMO PERO NO HACE NADA
+
+
+	}
+	method peso() {
+		 return 500 
+		 }
+	method nivelPeligrosidad() { 
+		return 10 
+		}
+
+	method bultosNecesariosParaSerTransportado(){
+		return 1
+		
+	}
+}
+
+object arenaAGranel{
+	var peso = 0
+
+	method aplicarEfectoDeAccidente(){
+    peso = peso + 20
+
+	}
+	
+	 method peso(){
+		return peso
+	 }
+	 method cambiarPeso(_cantidad){
+		peso = _cantidad
+	 }
+	 method nivelPeligrosidad(){
+		return 1
+	 }
+	 method bultosNecesariosParaSerTransportado(){
+		return 1
+		
+	}
+
+
+}
+object bumblebee{
+	var modo =  auto
+
+
+	method aplicarEfectoDeAccidente(){
+		if (modo() == auto){
+			self.cambiarModo(robot)
+		} else {
+			self.cambiarModo(auto)
+		}
+	}
+
+
+    method bultosNecesariosParaSerTransportado(){
+		return 2
+		
+	}
+	method modo(){
+		return modo
+	}
+
+	method cambiarModo(_modo){
+		modo = _modo
+	}
+	method peso(){
+		return 800
+	}
+	method nivelPeligrosidad(){
+		return (self.modo().nivelDePeligrosidad())
+	}
+}
+ 
+ //MODOS DE BUMBLEBEE//
+object auto{
+	method nivelPeligrosidad (){
+		return 15
+	}
+}
+
+object robot{
+	method nivelPeligrosidad(){
+		return 30
+	}
 }
 
 
+object paqueteDeLadrillos{
+	var cantidadDeLadrillosDelPaquete = 0
+
+	method aplicarEfectoDeAccidente(){
+		if (cantidadDeLadrillosDelPaquete > 12 ){
+			cantidadDeLadrillosDelPaquete = cantidadDeLadrillosDelPaquete - 12
+		} else {
+			cantidadDeLadrillosDelPaquete = 0
+		}
+	}
+	
+
+
+	method bultosNecesariosParaSerTransportado(){
+		 if self.cantidadDeLadrillosDelPaquete() <= 100 { return 1
+		 } 
+		 else if self.cantidadDeLadrillosDelPaquete() > 100 && self.cantidadDeLadrillosDelPaquete()<= 300{
+		     return 2
+			 }
+			 else if self.cantidadDeLadrillosDelPaquete()> 300 { return 3
+			 }	
+	}
+
+
+	method cantidadDeLadrillosDelPaquete(){
+		return cantidadDeLadrillosDelPaquete
+	}
+
+	method cambiarCantidadDeLadrillosDelPaquete(_cantidad){
+		cantidadDeLadrillosDelPaquete= _cantidad 
+
+	}
+	method peso(){
+		return (cantidadDeLadrillosDelPaquete *2)
+
+	}
+	method nivelPeligrosidad(){
+		return 2
+	}
+}
+
+object bateriaAntiaerea{
+
+	var contieneMisiles = true
+
+
+	method aplicarEfectoDeAccidente(){
+      if (self.contieneMisiles() ){
+		self.sacarMisiles() 
+	  }
+	}
+
+	 method bultosNecesariosParaSerTransportado(){
+		if self.contieneMisiles(){ return 2
+		}
+		else return 1
+	}
+	method contieneMisiles(){
+		return contieneMisiles
+	}
+
+	method ponerMisiles(){
+		contieneMisiles = true
+	}
+
+	method sacarMisiles(){
+		contieneMisiles = false 
+	}
+
+	
+	method peso(){
+		return (if (contieneMisiles) 300 else 200)
+       
+	}
+}
+
+object residuosRadioactivos{
+	var peso = 0
+
+method aplicarEfectoDeAccidente(){
+	peso = peso + 15
+
+}
+
+
+method peso(){
+	return peso
+
+}
+
+method cambiarPeso(_peso){
+	peso = _peso
+}
+
+method nivelPeligrosidad(){
+	return 200
+}
+method bultosNecesariosParaSerTransportado(){
+		return 1
+		
+	}
+
+}
+
+object contenedorPortuario{
+	var cosas = #{}
+
+method aplicarEfectoDeAccidente(){
+	self.cosas().forEach({cosa => cosa.aplicarEfectoDeAccidente()})
+
+}
+
+method bultosNecesariosParaSerTransportado(){
+	return 1 + self.cosas().map({cosa=> cosa.bultosNecesariosParaSerTransportado()})
+}
+
+method cosas(){
+	return cosas
+}
+	method cargar(unaCosa) {
+		if(!cosas.contains(unaCosa)){
+		cosas.add(unaCosa) 
+	    }
+	}
+
+	method descargar(unaCosa){
+		if (cosas.contains(unaCosa)){
+		cosas.remove(unaCosa)
+		}
+	}
+
+method peso(){
+	return 100 +  self.cosas().sum{cosa => cosa.peso()}
+}
+
+
+method nivelPeligrosidad(){
+	return (if (cosas == {}) 0 else self.cosas().max({cosa => cosa.nivelPeligrosidad()}))
+}
+}
+
+object embalajeDeSeguridad{
+ var tieneDentroLaCosa= knightRider
+
+ method  aplicarEfectoDeAccidente(){ //SE DEFINE VACÍO PARA QUE LO ENTIENDA CAMION, PERO NO HACE NADA
+ }
+
+ method bultosNecesariosParaSerTransportado(){
+		return 2
+		
+	}
+
+method cambiarLoQueTieneDentroPor(_cosa){
+	tieneDentroLaCosa = _cosa 
+}
+
+method tieneDentroLaCosa(){
+	return tieneDentroLaCosa
+}
+
+method peso(){
+	return self.tieneDentroLaCosa().peso()
+}
+
+method nivelPeligrosidad(){
+	return self.tieneDentroLaCosa().nivelPeligrosidad()/2
+}
+
+
+}
