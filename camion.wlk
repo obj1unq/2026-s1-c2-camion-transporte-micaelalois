@@ -86,6 +86,11 @@ method puedeCircularEnRutaConNivelMaximo(nivelMaximo){
 object almacen{
    var cosas= [] ///Lo dejo en lista por si en algún momento pregunta en que orden llegaron las cosas
 
+
+method agregarCosas(_cosa){
+	cosas = cosas.add(_cosa)
+}
+
 method cosas(){
 	return cosas
 }
