@@ -211,30 +211,73 @@ y Bumblebee está en modo robot."{
 }
 }
 
-/*El contenedor portuario vacío pesa 100 y su peligrosidad es 0.
-El contenedor portuario que tiene a Knight Rider y 50 kg de arena a granel pesa 650 y su peligrosidad es 10.
-Si el embalaje de seguridad envuelve a Knight Rider, su peso es 500 y su peligrosidad es 5.
-Si el embalaje de seguridad envuelve a Bumblebee en modo auto, su peso es 800 y su peligrosidad 7,5.*/
-
-/*Para un camión cargado con Bumblebee y un paquete de 300 ladrillos:
-
-Tiene algo que pesa entre 5 y 700.
-Tiene algo que pesa entre 5 y 1000.
-No tiene algo que pese entre 900 y 1000.*/
-
-  
-/*Para un camión cargado con Bumblebee y un paquete de 300 ladrillos, la cosa más pesada es Bumblebee.
-Para un camión vacío, no se puede calcular la cosa más pesada.*/
 
 
-/*Ejemplo
-Para un camión cargado con Bumblebee y un paquete de 300 ladrillos, los pesos son 800 y 600.
-Nota: ojo al armar el test, porque para Wollok [800,600] es distinto a [600,800]. A nivel de negocio da igual.
-*/
+describe "Contenedor"{
+
+// /*El contenedor portuario vacío pesa 100 y su peligrosidad es 0.
+// El contenedor portuario que tiene a Knight Rider y 50 kg de arena a granel pesa 650 y su peligrosidad es 10.
+// Si el embalaje de seguridad envuelve a Knight Rider, su peso es 500 y su peligrosidad es 5.
+// Si el embalaje de seguridad envuelve a Bumblebee en modo auto, su peso es 800 y su peligrosidad 7,5.*/
+
+test "Para un camión cargado con Bumblebee y un paquete de 300 ladrillos"{
+
+    assert.equals(100, contenedorPortuario.peso())
+    assert.equals(0, contenedorPortuario.nivelPeligrosidad())
+    embalajeDeSeguridad.cambiarLoQueTieneDentroPor(knightRider)
+    assert.equals(500, embalajeDeSeguridad.peso())
+    assert.equals(5, embalajeDeSeguridad.nivelPeligrosidad())
+    bumblebee.cambiarModo(auto)
+    embalajeDeSeguridad.cambiarLoQueTieneDentroPor(bumblebee)
+    assert.equals(800, embalajeDeSeguridad.peso())
+    assert.equals(7.5, embalajeDeSeguridad.nivelPeligrosidad())
 
 
-/*Ejemplos
-Caso 1
+test "camion con bumblebee y 300 ladrillos"
+    camion.cargar(bumblebee)
+    paqueteDeLadrillos.cambiarCantidadDeLadrillosDelPaquete(300)
+    camion.cargar(paqueteDeLadrillos)
+    assert.that(camion.tieneAlgoQuePesaEntre(5, 700))
+    assert.that(camion.tieneAlgoQuePesaEntre(5, 1000))
+    assert.notThat(camion.tieneAlgoQuePesaEntre(900, 1000))
+    assert.equals(bumblebee, camion.cosaConMayorPeso())
+
+
+
+}
+
+}
+
+
+
+
+describe "Caso 1"{
+    /*Suponiendo que el camión tiene:
+
+El contenedor portuario con Knight Rider y Bumblebee.
+El embalaje de seguridad envolviendo los residuos radiactivos.
+Arena a granel.
+Un paquete de 50 ladrillos.
+La batería antiaérea descargada.
+Entonces la cantidad de bultos es: 9.*/
+
+test "cantidad de bultos igual a 9 "{
+    camion.cargar(contenedorPortuario)
+    contenedorPortuario.cargar(knightRider)
+    contenedorPortuario.cargar(bumblebee)
+    camion.cargar(embalajeDeSeguridad)
+    embalajeDeSeguridad.cambiarLoQueTieneDentroPor(residuosRadioactivos)
+    camion.cargar(paqueteDeLadrillos)
+    paqueteDeLadrillos.cambiarCantidadDeLadrillosDelPaquete(50)
+    camion.cargar(bateriaAntiaerea)
+    bateriaAntiaerea.sacarMisiles()
+    assert.equals(9, camion.totalDeBultosTransportado)
+}
+
+
+
+
+}
 Suponiendo que el camión tiene:
 
 El contenedor portuario con Knight Rider y Bumblebee.

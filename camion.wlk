@@ -18,6 +18,10 @@ method sufrirAccidente(){
 	cosas().forEach({cosa => cosa.aplicarEfectoDeAccidente()})
 }
 
+
+method totalDeBultosTransportado(){
+	return self.cosas().sum({cosa => cosa.bultosNecesariosParaSerTransportado()})
+}
 method pesoDeTodasLasCosas(){
 	return self.cosas().map({cosa => cosa.peso()}) //MAP HACE RECORRIDO DE TRANSFORMACIÓN
 }
