@@ -1,4 +1,9 @@
 object knightRider {
+
+	method aplicarEfectoDeAccidente(){ //SE DEFINE PARA QUE CAMION ENTIENDA POLIMORFISMO PERO NO HACE NADA
+
+
+	}
 	method peso() {
 		 return 500 
 		 }
@@ -14,6 +19,12 @@ object knightRider {
 
 object arenaAGranel{
 	var peso = 0
+
+	method aplicarEfectoDeAccidente(){
+    peso = peso + 20
+
+	}
+	
 	 method peso(){
 		return peso
 	 }
@@ -32,6 +43,17 @@ object arenaAGranel{
 }
 object bumblebee{
 	var modo =  auto
+
+
+	method aplicarEfectoDeAccidente(){
+		if (modo() == auto){
+			self.cambiarModo(robot)
+		} else {
+			self.cambiarModo(auto)
+		}
+	}
+
+
     method bultosNecesariosParaSerTransportado(){
 		return 2
 		
@@ -68,6 +90,15 @@ object robot{
 object paqueteDeLadrillos{
 	var cantidadDeLadrillosDelPaquete = 0
 
+	method aplicarEfectoDeAccidente(){
+		if (cantidadDeLadrillosDelPaquete > 12 ){
+			cantidadDeLadrillosDelPaquete = cantidadDeLadrillosDelPaquete - 12
+		} else {
+			cantidadDeLadrillosDelPaquete = 0
+		}
+	}
+	
+
 
 	method bultosNecesariosParaSerTransportado(){
 		 if self.cantidadDeLadrillosDelPaquete() <= 100 { return 1
@@ -98,7 +129,16 @@ object paqueteDeLadrillos{
 }
 
 object bateriaAntiaerea{
+
 	var contieneMisiles = true
+
+
+	method aplicarEfectoDeAccidente(){
+      if (self.contieneMisiles() ){
+		self.sacarMisiles() 
+	  }
+	}
+
 	 method bultosNecesariosParaSerTransportado(){
 		if self.contieneMisiles(){ return 2
 		}
@@ -126,6 +166,12 @@ object bateriaAntiaerea{
 object residuosRadioactivos{
 	var peso = 0
 
+method aplicarEfectoDeAccidente(){
+	peso = peso + 15
+
+}
+
+
 method peso(){
 	return peso
 
@@ -147,6 +193,11 @@ method bultosNecesariosParaSerTransportado(){
 
 object contenedorPortuario{
 	var cosas = #{}
+
+method aplicarEfectoDeAccidente(){
+	self.cosas().forEach({cosa => cosa.aplicarEfectoDeAccidente()})
+
+}
 
 method bultosNecesariosParaSerTransportado(){
 	return 1 + cosas().map({cosa=> cosa.bultosNecesariosParaSerTransportado()})
@@ -179,6 +230,9 @@ method nivelPeligrosidad(){
 
 object embalajeDeSeguridad{
  var tieneDentroLaCosa= knightRider
+
+ method  aplicarEfectoDeAccidente(){ //SE DEFINE VACÍO PARA QUE LO ENTIENDA CAMION, PERO NO HACE NADA
+ }
 
  method bultosNecesariosParaSerTransportado(){
 		return 2

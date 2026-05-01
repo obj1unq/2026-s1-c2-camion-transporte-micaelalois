@@ -4,6 +4,10 @@ object camion {
 	const property cosas = #{}
 
 
+method sufrirAccidente(){
+	cosas().forEach({cosa => cosa.aplicarEfectoDeAccidente()})
+}
+
 method pesoDeTodasLasCosas(){
 	return self.cosas().map({cosa => cosa.peso()}) //MAP HACE RECORRIDO DE TRANSFORMACIÓN
 }
