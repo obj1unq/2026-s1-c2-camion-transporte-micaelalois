@@ -200,7 +200,7 @@ method aplicarEfectoDeAccidente(){
 }
 
 method bultosNecesariosParaSerTransportado(){
-	return 1 + cosas().map({cosa=> cosa.bultosNecesariosParaSerTransportado()})
+	return 1 + self.cosas().map({cosa=> cosa.bultosNecesariosParaSerTransportado()})
 }
 
 method cosas(){

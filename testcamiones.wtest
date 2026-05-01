@@ -232,8 +232,8 @@ test "Para un camión cargado con Bumblebee y un paquete de 300 ladrillos"{
     assert.equals(800, embalajeDeSeguridad.peso())
     assert.equals(7.5, embalajeDeSeguridad.nivelPeligrosidad())
 
-
-test "camion con bumblebee y 300 ladrillos"
+}
+test "camion con bumblebee y 300 ladrillos"{
     paqueteDeLadrillos.cambiarCantidadDeLadrillosDelPaquete(300)
     camion.cargar(bumblebee)
     camion.cargar(paqueteDeLadrillos)
@@ -241,8 +241,6 @@ test "camion con bumblebee y 300 ladrillos"
     assert.that(camion.tieneAlgoQuePesaEntre(5, 1000))
     assert.notThat(camion.tieneAlgoQuePesaEntre(900, 1000))
     assert.equals(bumblebee, camion.cosaConMayorPeso())
-
-
 
 }
 
@@ -369,7 +367,6 @@ El camión arranca teniendo a Bumblebee en modo auto y arena a granel con 50 kg"
                     almacen.cosas())
         assert.equals([], camion.cosas())
     }
-}
 
      test "ruta 9 fallido por peligrosidad"{
          almacen.agregarCosas(knightRider)
@@ -438,5 +435,7 @@ test "caminos vecinales fallido"{
         assert.notThat(caminosVecinales.soportaViajesDe(camion))
         assert.equals([knightRider, residuosRadioactivos], almacen.cosas())
         assert.equals([bumblebee, arenaAGranel], camion.cosas())
+
+}
 
 }
